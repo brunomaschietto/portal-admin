@@ -1,0 +1,11 @@
+{
+    "name": "bruno/portal-admin",
+    "description": "Portal administrativo para gestao de clientes",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require": {}
+}

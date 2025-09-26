@@ -1,0 +1,35 @@
+CREATE DATABASE IF NOT EXISTS portal_admin CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE portal_admin;
+
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(100) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  full_name VARCHAR(150),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE clients (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(150) NOT NULL,
+  birth_date DATE,
+  cpf VARCHAR(14) UNIQUE,
+  rg VARCHAR(30),
+  phone VARCHAR(30),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE addresses (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  client_id INT NOT NULL,
+  street VARCHAR(255),
+  number VARCHAR(50),
+  complement VARCHAR(255),
+  neighborhood VARCHAR(150),
+  city VARCHAR(150),
+  state VARCHAR(50),
+  zip VARCHAR(20),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE
+);
