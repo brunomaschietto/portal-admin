@@ -49,7 +49,7 @@ cd portal-admin
 
 ### 2. Instale as dependências
 ```bash
-composer install
+docker-compose up -d --build
 ```
 
 ### 3. Execute o Sistema

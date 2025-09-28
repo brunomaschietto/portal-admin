@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '/var/www/vendor/autoload.php';
+require '/var/www/html/vendor/autoload.php';
 require __DIR__ . '/../includes/db.php';
 
 if (!isset($_SESSION['user_id'])) {
