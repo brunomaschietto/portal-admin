@@ -18,6 +18,8 @@ services:
     image: php:8.1-apache
     volumes:
       - ./www:/var/www/html
+      - ./vendor:/var/www/vendor
+      - ./src:/var/www/src
     depends_on:
       - db
     ports:

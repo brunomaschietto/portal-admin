@@ -62,7 +62,6 @@ class AddressRepository {
         $stmt = $this->pdo->prepare("SELECT * FROM addresses WHERE client_id = :client_id");
         $stmt->execute([':client_id' => $clientId]);
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
         $addresses = [];
         foreach ($rows as $row) {
             $address = new Address(
@@ -80,6 +79,31 @@ class AddressRepository {
             $addresses[] = $address;
         }
         return $addresses;
+    }
+
+    public function update(Address $address): bool {
+        $stmt = $this->pdo->prepare(
+            "UPDATE addresses 
+             SET street = :street, 
+                 number = :number, 
+                 complement = :complement, 
+                 neighborhood = :neighborhood, 
+                 city = :city, 
+                 state = :state, 
+                 zip = :zip 
+             WHERE id = :id"
+        );
+
+        return $stmt->execute([
+            ':street'      => $address->getStreet(),
+            ':number'      => $address->getNumber(),
+            ':complement'  => $address->getComplement(),
+            ':neighborhood'=> $address->getNeighborhood(),
+            ':city'        => $address->getCity(),
+            ':state'       => $address->getState(),
+            ':zip'         => $address->getZip(),
+            ':id'          => $address->getId()
+        ]);
     }
 
     public function delete(int $id): bool {

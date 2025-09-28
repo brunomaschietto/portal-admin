@@ -30,7 +30,6 @@ class UserController {
 
             $user = $this->userService->authenticate($username, $password);
             if ($user) {
-                session_start();
                 $_SESSION['user_id'] = $user->getId();
                 $_SESSION['username'] = $user->getUsername();
                 header("Location: /clients/list.php");

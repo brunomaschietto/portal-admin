@@ -39,6 +39,24 @@ class AddressService {
         return $this->repository->findByClientId($clientId);
     }
 
+    public function editAddress(int $clientId, array $addressData): void {
+        $existingAddresses = $this->repository->findByClientId($clientId);
+        
+        if (!empty($existingAddresses)) {
+            $address = $existingAddresses[0];
+            
+            $address->setStreet($addressData['street'] ?? $address->getStreet());
+            $address->setNumber($addressData['number'] ?? $address->getNumber());
+            $address->setComplement($addressData['complement'] ?? $address->getComplement());
+            $address->setNeighborhood($addressData['neighborhood'] ?? $address->getNeighborhood());
+            $address->setCity($addressData['city'] ?? $address->getCity());
+            $address->setState($addressData['state'] ?? $address->getState());
+            $address->setZip($addressData['zip'] ?? $address->getZip());
+
+            $this->repository->update($address);
+        }
+    }
+
     public function deleteAddress(int $id): bool {
         return $this->repository->delete($id);
     }

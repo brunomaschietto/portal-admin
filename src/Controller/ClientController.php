@@ -36,12 +36,17 @@ class ClientController {
 
     public function list(): void {
         $clients = $this->clientService->getAllClients();
-        include __DIR__ . "/../../views/clients/list.php"; 
+        include __DIR__ . "/../../www/clients/list.php"; 
     }
 
     public function edit(int $id, array $data): void {
         try {
             $this->clientService->updateClient($id, $data);
+            if (!empty($data['addresses']) && is_array($data['addresses'])) {
+                foreach ($data['addresses'] as $addressData) {
+                    $this->addressService->editAddress($id, $addressData);
+                }
+            }
             header("Location: /clients/list.php?updated=1");
             exit;
         } catch (\Exception $e) {
@@ -50,6 +55,7 @@ class ClientController {
     }
 
     public function delete(int $id): void {
+        $this->addressService->deleteAddress($id);
         $this->clientService->deleteClient($id);
         header("Location: /clients/list.php?deleted=1");
         exit;
