@@ -34,11 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'phone' => trim($_POST['phone'] ?? '')
         ];
 
-        // Processar múltiplos endereços
         $addresses = [];
         if (isset($_POST['addresses']) && is_array($_POST['addresses'])) {
             foreach ($_POST['addresses'] as $addressData) {
-                // Só adiciona o endereço se pelo menos a rua estiver preenchida
                 if (!empty(trim($addressData['street'] ?? ''))) {
                     $addresses[] = [
                         'street' => trim($addressData['street']),
@@ -59,7 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         $success = "Cliente criado com sucesso!";
         
-        // Limpar dados do POST após sucesso
         $_POST = [];
         
     } catch (Exception $e) {
@@ -154,7 +151,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div id="addressesContainer">
                 <h2>Endereços (Opcional)</h2>
                 
-                <!-- Primeiro endereço -->
                 <div class="address-section" data-address-index="0">
                     <div class="address-header">
                         <span class="address-number">Endereço #1</span>
