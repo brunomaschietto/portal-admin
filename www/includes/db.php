@@ -1,5 +1,5 @@
 <?php
-$DB_HOST = getenv('DB_HOST') ?: 'db';   // <- aqui TEM que ser 'db', não localhost
+$DB_HOST = getenv('DB_HOST') ?: 'db';  
 $DB_NAME = getenv('DB_NAME') ?: 'portal_admin';
 $DB_USER = getenv('DB_USER') ?: 'appuser';
 $DB_PASS = getenv('DB_PASS') ?: 'apppass';
